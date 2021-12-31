@@ -1,0 +1,86 @@
+<form class="search-form">
+  <mat-form-field class="search-full-width" appearance="fill">
+    <mat-label>Search for orders</mat-label>
+    <input
+      type="text"
+      aria-label="Orders"
+      matInput
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+      (keyup)="applyFilter($any($event.target).value)"
+      (change)="applyFilter($any($event.target).value)"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+<table
+  [@listAnimation]="dataSource"
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8"
+>
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Work order id Column -->
+  <ng-container class="test" matColumnDef="work_order_id">
+    <th mat-header-cell *matHeaderCellDef>WO ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.work_order_id }}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <!-- Received date Column -->
+  <ng-container matColumnDef="received_date">
+    <th mat-header-cell *matHeaderCellDef>Received date</th>
+    <td mat-cell *matCellDef="let element">{{ element.received_date }}</td>
+  </ng-container>
+
+  <!-- Assigned to Column  -->
+  <ng-container matColumnDef="assigned_to">
+    <th mat-header-cell *matHeaderCellDef>Assigned to (status)</th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container
+        *ngIf="
+          element.assigned_to.length > 1 || element.assigned_to.length === 1;
+          else infoText
+        "
+      >
+        <p *ngFor="let one of element.assigned_to; let i = index">
+          {{ element.assigned_to[i].person_name }} ({{
+            element.assigned_to[i].status
+          }})
+        </p>
+      </ng-container>
+      <ng-template #infoText>
+        <p *ngIf="element.assigned_to.length === 0">Not Assigned</p>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+  </ng-container>
+
+  <!-- Priority Column -->
+  <ng-container matColumnDef="priority">
+    <th mat-header-cell *matHeaderCellDef>Priority</th>
+    <td mat-cell *matCellDef="let element">{{ element.priority }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
