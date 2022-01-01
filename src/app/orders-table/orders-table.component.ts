@@ -78,6 +78,7 @@ export class OrdersTableComponent implements OnInit {
       this.loadedData = data;
       data.forEach((x) => this.options.push(x.description));
       this.dataSource = new MatTableDataSource<Order>(this.loadedData);
+      this.fetchingService.setData(data);
     });
 
     this.filteredOptions = this.myControl.valueChanges.pipe(

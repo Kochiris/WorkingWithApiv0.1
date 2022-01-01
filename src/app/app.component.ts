@@ -13,15 +13,7 @@ import { FetchingService } from './shared/fetching.service';
   providers: [FetchingService],
 })
 export class AppComponent implements OnInit {
-  data: Order[];
+  constructor(private fetchService: FetchingService) {}
 
-  constructor(private fetchService: FetchingService) {
-  }
-
-  ngOnInit() {
-    this.fetchService.fetchForOrders().subscribe((data) => {
-      this.data = data;
-      this.fetchService.setData(data);
-    });
-  }
+  ngOnInit() {}
 }
