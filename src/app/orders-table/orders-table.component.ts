@@ -90,7 +90,7 @@ export class OrdersTableComponent implements OnInit {
   onFetchData() {
     this.isFetching = true;
 
-    this.fetchingService.fetchForOrders().pipe().subscribe({
+    this.fetchingService.fetchForOrders().subscribe({
 
       next: (data) => {
         this.loadedData = data;
@@ -107,11 +107,5 @@ export class OrdersTableComponent implements OnInit {
       complete: ()=>console.log('complete')
     }
     );
-
-  //   .subscribe({
-  //     next: (v) => console.log(v),
-  //     error: (e) => console.error(e),
-  //     complete: () => console.info('complete') 
-  // })
   }
 }
