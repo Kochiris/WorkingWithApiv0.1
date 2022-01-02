@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [AppComponent, OrdersTableComponent],
@@ -17,12 +19,14 @@ import { OrdersTableComponent } from './orders-table/orders-table.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatTableModule,
     HttpClientModule,
     MatInputModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

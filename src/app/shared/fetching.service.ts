@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Order } from '../orders-table/orders-table.component';
+import { Order } from './order.model';
+
+
+
+
+
 @Injectable()
 export class FetchingService {
   private apiData = new BehaviorSubject<Order[]>(null);
@@ -12,7 +17,7 @@ export class FetchingService {
   fetchForOrders() {
     return this.http.get<Order[]>(this.URL);
   }
-  setData(data:Order[]) {
+  setData(data: Order[]) {
     this.apiData.next(data);
   }
 }

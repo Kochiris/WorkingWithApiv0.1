@@ -12,15 +12,7 @@ import {
   stagger,
 } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface Order {
-  work_order_id: number;
-  description: string;
-  received_date: string;
-  assigned_to: Array<{}>;
-  status: string;
-  priority: string;
-}
+import { Order } from '../shared/order.model';
 
 @Component({
   selector: 'app-orders-table',
@@ -56,6 +48,9 @@ export interface Order {
   ],
 })
 export class OrdersTableComponent implements OnInit {
+  error = null;
+
+  isFetching: boolean = false;
   option: string;
   myControl = new FormControl();
   options: string[] = [];
@@ -74,12 +69,8 @@ export class OrdersTableComponent implements OnInit {
   constructor(private fetchingService: FetchingService) {}
 
   ngOnInit(): void {
-    this.fetchingService.fetchForOrders().subscribe((data) => {
-      this.loadedData = data;
-      data.forEach((x) => this.options.push(x.description));
-      this.dataSource = new MatTableDataSource<Order>(this.loadedData);
-      this.fetchingService.setData(data);
-    });
+    this.isFetching = true;
+    this.onFetchData();
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -94,5 +85,33 @@ export class OrdersTableComponent implements OnInit {
   }
   applyFilter(filterValue) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onFetchData() {
+    this.isFetching = true;
+
+    this.fetchingService.fetchForOrders().pipe().subscribe({
+
+      next: (data) => {
+        this.loadedData = data;
+        data.forEach((order) => this.options.push(order.description));
+        this.dataSource = new MatTableDataSource<Order>(this.loadedData);
+        this.fetchingService.setData(data);
+        this.isFetching = false;
+      },
+      error:(error) => {
+        this.isFetching = false;
+        this.error = error;
+        console.log(error);
+      },
+      complete: ()=>console.log('complete')
+    }
+    );
+
+  //   .subscribe({
+  //     next: (v) => console.log(v),
+  //     error: (e) => console.error(e),
+  //     complete: () => console.info('complete') 
+  // })
   }
 }

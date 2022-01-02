@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from './orders-table/orders-table.component';
+
 import { FetchingService } from './shared/fetching.service';
 
 /**
@@ -13,7 +13,7 @@ import { FetchingService } from './shared/fetching.service';
   providers: [FetchingService],
 })
 export class AppComponent implements OnInit {
-  constructor(private fetchService: FetchingService) {}
+  constructor() {}
 
   ngOnInit() {}
 }
