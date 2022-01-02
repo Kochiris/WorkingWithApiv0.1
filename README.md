@@ -4,19 +4,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Preparation
 
-Cheack if you have node.js and npm installed, u can use `node -v` & `npm -v`  command. In case you dont have any of this heare is a link to download `https://nodejs.org/en/`
-Next setp is cheack that you have angular installed, type `ng --version`, if you don't have it installed type `npm install -g @angular/cli` in your terminal.
+Check if you have node.js and npm installed, u can use `node -v` & `npm -v`  command. In case you don't have any of this here is a link to download `https://nodejs.org/en/`
+Next step is check that you have angular installed, type `ng --version`, if you don't have it installed type `npm install -g @angular/cli` in your terminal.
 The last step is to install all pachages, type `npm install` in your terminal.
 
 ## Development server
 
 Run `npm run server:all` for a dev server and json-server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-To cheack your json-server navigate to `http://localhost:3000/`
+To check your json-server navigate to `http://localhost:3000/`
 
 ## Instruction manual
 
-This app fetch data from json-server, after succesful fetch on your screen should appear all work orders from API, you can search for any order via search input on top of table, it also contains autocomplete feature. After you type any string search engine will cheack if any of orders match your string and display only matching orders in table.
-If after starting the app nothing appear on your screen try to cheack that json-server is running. To do this navigate to `http://localhost:3000/`. If you cannot connect to this link, you need to open new terminal, navigate to place where this app is stored and type `npm run server`. After that refresh page on `http://localhost:4200/` and everything should work well.
+This app fetch data from json-server, after succesful fetch on your screen should appear all work orders from API, you can search for any order via search input on top of table, it also contains autocomplete feature. After you type any string search engine will check if any of orders match your string and display only matching orders in table.
+If nothing appear on your screen after starting the app try to check that json-server is running. To do this navigate to `http://localhost:3000/`. If you cannot connect to this link, you need to open new terminal, navigate to place where this app is stored and type `npm run server`. After that refresh page on `http://localhost:4200/` and everything should work well.
 
 ## Code scaffolding
 
